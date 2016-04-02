@@ -1,3 +1,4 @@
+
 var Bookshelf = require('bookshelf');
 var path = require('path');
 
@@ -22,6 +23,7 @@ db.knex.schema.hasTable('urls').then(function(exists) {
       link.string('code', 100);
       link.string('title', 255);
       link.integer('visits');
+      //link.integer('user_id');
       link.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
@@ -50,11 +52,13 @@ db.knex.schema.hasTable('users').then(function(exists){
       user.increments('id').primary();
       user.string('username',100).unique();
       user.string('username',100)
+
       user.timestamps();
     }).then(function (table) {
       console.log('Created Table', table);
     });
   }
+
 
 })
 

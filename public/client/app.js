@@ -3,7 +3,7 @@ window.Shortly = Backbone.View.extend({
 
   events: {
     'click li a.index':  'renderIndexView',
-    'click li a.create': 'renderCreateView'
+    'click li a.create': 'renderCreateView',
   },
 
   initialize: function(){
@@ -11,6 +11,7 @@ window.Shortly = Backbone.View.extend({
     $('body').append(this.render().el);
 
     this.router = new Shortly.Router({ el: this.$el.find('#container') });
+
     this.router.on('route', this.updateNav, this);
 
     Backbone.history.start({ pushState: true });
@@ -31,10 +32,15 @@ window.Shortly = Backbone.View.extend({
     this.router.navigate('/create', { trigger: true });
   },
 
+  renderLoginView: function(e){
+    e && e.preventDefault();
+    this.router.navigate('/login', { trigger: true });
+  },
+
   updateNav: function(routeName){
     this.$el.find('.navigation li a')
       .removeClass('selected')
       .filter('.' + routeName)
       .addClass('selected');
-  }
+  },
 });
